@@ -1,11 +1,11 @@
 package com.battleship.enums;
 
-public enum Orientation {
-    VERTICAL("VERTICAL"), HORIZONTAL("HORIZONTAL");
+public enum HorizontalOrientation {
+    L2R("L2R"), R2L("R2L");
 
     private String orientation;
 
-    Orientation(String orientation) {
+    HorizontalOrientation(String orientation) {
         this.orientation = orientation;
     }
 

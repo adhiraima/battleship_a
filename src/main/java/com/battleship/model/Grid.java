@@ -37,6 +37,10 @@ public class Grid {
         this.gridType = GridType.get(gridType);
     }
 
+    public Block[][] getBlocks() {
+        return this.blocks;
+    }
+
     public void printGrid() throws IOException {
         //Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
         System.out.println((this.gridType.equals(GridType.ENEMY) ? ANSI_RED_BACKGROUND : ANSI_GREEN_BACKGROUND)

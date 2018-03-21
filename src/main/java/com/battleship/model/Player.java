@@ -34,20 +34,36 @@ public class Player {
         return this.shipCount;
     }
 
-    public String placeShip(ShipType shipType, Latitude latitude, Longitude longitude, Orientation orientation) {
+    public String placeShip(ShipType shipType, Latitude latitude, Longitude longitude, AxialOrientation axialOrientation) {
         if (this.shipCount + 1 > this.ships.length)
             return "Sorry, you cannot place anymore ships!";
-        Ship ship = new Ship(shipType);
-        if (checkPlacement(shipType, latitude, longitude, orientation)) {
+        if (checkPlacement(shipType, latitude, longitude, axialOrientation)) {
+            Ship ship = new Ship(shipType);
             this.ships[this.shipCount++] = ship;
-           return  "Placed " + shipType.toString() + " for " + this.name + " successfully!";
+            occupyBoardSpace(ship, latitude, longitude, axialOrientation);
+            return  "Placed " + shipType.toString() + " for " + this.name + " successfully!";
         } else {
            return  "Unable to place " + shipType.toString() + " for " + name + "!";
         }
     }
 
-    private boolean checkPlacement(ShipType shipType, Latitude latitude, Longitude longitude, Orientation orientation) {
-        if (orientation.equals(Orientation.HORIZONTAL)
+    private void occupyBoardSpace(Ship ship, Latitude latitude, Longitude longitude, AxialOrientation axialOrientation) {
+        switch (axialOrientation) {
+            case HORIZONTAL: for (int i = longitude.getLongitude(); i < ship.getShipType().getSize() + longitude.getLongitude(); i++) {
+                                 this.board.getBlocks()[latitude.getLatitude()][i].occupy();
+
+                             }
+                             break;
+            case VERTICAL:  for (int i = latitude.getLatitude(); i < ship.getShipType().getSize() + longitude.getLongitude(); i++) {
+                                this.board.getBlocks()[i][longitude.getLongitude()].occupy();
+                            }
+                            break;
+            default: break;
+        }
+    }
+
+    private boolean checkPlacement(ShipType shipType, Latitude latitude, Longitude longitude, AxialOrientation axialOrientation) {
+        if (axialOrientation.equals(AxialOrientation.HORIZONTAL)
                 && null != Longitude.get(longitude.getLongitude() + shipType.getSize())
                 && spaceFree()) {
             return true;

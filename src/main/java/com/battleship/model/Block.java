@@ -17,4 +17,16 @@ public class Block {
     public BlockState getState() {
         return this.state;
     }
+
+    public void occupy() {
+        this.state = BlockState.OCCUPIED;
+    }
+
+    public void miss() {
+        this.state = BlockState.MISS;
+    }
+
+    public void hit() {
+        this.state = BlockState.HIT;
+    }
 }
