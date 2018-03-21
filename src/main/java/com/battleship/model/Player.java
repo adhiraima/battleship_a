@@ -1,6 +1,7 @@
 package com.battleship.model;
 
 import com.battleship.enums.*;
+import com.battleship.utils.ApplicationConstants;
 
 public class Player {
     private final String name;
@@ -14,8 +15,8 @@ public class Player {
         this.name = name;
         this.board = new Grid(GridType.SELF.getGridType()).initialize();
         this.enemy = new Grid(GridType.ENEMY.getGridType()).initialize();
-        this.ships = new Ship[ShipType.BATTLESHIP.getNumber() + ShipType.CRUISER.getNumber()
-                        + ShipType.DESTROYER.getNumber() + ShipType.SUBMARINE.getNumber()];
+        this.ships = new Ship[ApplicationConstants.SHIPS_ALLOWED];//new Ship[ShipType.BATTLESHIP.getNumber() + ShipType.CRUISER.getNumber()
+                        //+ ShipType.DESTROYER.getNumber() + ShipType.SUBMARINE.getNumber()];
     }
 
     public String getName() {
@@ -35,7 +36,7 @@ public class Player {
     }
 
     public String placeShip(ShipType shipType, Latitude latitude, Longitude longitude, AxialOrientation axialOrientation) {
-        if (this.shipCount + 1 > this.ships.length)
+        if (ApplicationConstants.SHIPS_ALLOWED == this.ships.length)
             return "Sorry, you cannot place anymore ships!";
         if (checkPlacement(shipType, latitude, longitude, axialOrientation)) {
             Ship ship = new Ship(shipType);
