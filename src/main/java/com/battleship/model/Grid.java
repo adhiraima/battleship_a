@@ -41,11 +41,10 @@ public class Grid {
         return this.blocks;
     }
 
-    public void printGrid() throws IOException {
-        //Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
+    public void printGrid(String name) throws IOException {
         System.out.println((this.gridType.equals(GridType.ENEMY) ? ANSI_RED_BACKGROUND : ANSI_GREEN_BACKGROUND)
-                + ANSI_BLACK + this.gridType.getGridType() + ANSI_RESET);
-        for(int i = 0; i < this.gridType.getGridType().length(); i++) {
+                + ANSI_BLACK + (null != name ? name : this.gridType.getGridType()) + ANSI_RESET);
+        for(int i = 0; i < (null != name ? name.length() : this.gridType.getGridType().length()); i++) {
             System.out.print((this.gridType.equals(GridType.ENEMY) ? ANSI_RED_BACKGROUND : ANSI_GREEN_BACKGROUND)
                     + ANSI_BLACK + ApplicationConstants.UNDERLINE + ANSI_RESET);
         }
@@ -77,7 +76,6 @@ public class Grid {
             }
             System.out.println();
         }
-        System.out.println();
         System.out.println();
     }
 
@@ -118,12 +116,5 @@ public class Grid {
             }
         }
         return this;
-    }
-
-    public static void main(String[] args) throws IOException {
-        Grid grid = new Grid(GridType.SELF.toString());
-        grid.initialize().printGrid();
-        grid = new Grid(GridType.ENEMY.toString());
-        grid.initialize().printGrid();
     }
 }

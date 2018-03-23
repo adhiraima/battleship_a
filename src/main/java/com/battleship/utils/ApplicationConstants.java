@@ -10,4 +10,6 @@ public interface ApplicationConstants {
     public static final String CLEAR_COMMAND = "clear";
     public static final String MISSED = "O";
     public static final String HIT = "X";
+    public static final String EXIT_KEYWORD = "EXIT";
+    public static final String ENEMY = "ENEMY";
 }
