@@ -19,10 +19,10 @@ public class GameServer {
         Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
         //take player name inputs
         System.out.print("Enter Player 1 name: ");
-        String p1 = scanner.next();
+        String p1 = scanner.nextLine();
         System.out.println(ApplicationConstants.SPACE);
         System.out.print("Enter Player 2 name: ");
-        String p2 = scanner.next();
+        String p2 = scanner.nextLine();
         System.out.println(ApplicationConstants.SPACE);
 
         //create the game
@@ -47,14 +47,13 @@ public class GameServer {
 
             System.out.print("Please choose a ship by number: ");
             int chosenShip = scanner.nextInt();
-            System.out.println(ApplicationConstants.SPACE);
+            scanner.nextLine();
             System.out.print("Please select Coordinates to place a ship (ROW space COLUMN): ");
             String latitude = scanner.next();
             String longitude = scanner.next();
-            System.out.println(ApplicationConstants.SPACE);
+            scanner.nextLine();
             System.out.print("Please select Orientation (VERTICAL or HORIZONTAL): ");
             String orientation = scanner.next();
-            System.out.println(ApplicationConstants.SPACE);
             switch (chosenShip) {
                 case 1: player.addShip(ShipType.BATTLESHIP,
                                         Latitude.valueOf(latitude.toUpperCase()),
@@ -74,6 +73,7 @@ public class GameServer {
                                         AxialOrientation.valueOf(orientation.toUpperCase())); break;
                 default: break;
             }
+            scanner.nextLine();
         }
     }
 }

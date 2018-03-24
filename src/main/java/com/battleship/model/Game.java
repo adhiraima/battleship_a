@@ -44,8 +44,8 @@ public class Game {
             this.printGrids(this.getPlayer1());
             System.out.println("Welcome Player " + this.getPlayer1().getName() + "!");
             System.out.print("Please enter the coordinates of your move (ROW and COLUMN): ");
-            String lat = scanner.next();
-            String lon = scanner.next();
+            String lat = scanner.nextLine();
+            String lon = scanner.nextLine();
             this.move(this.getPlayer1(), this.getPlayer2(), Latitude.valueOf(lat.toUpperCase()),
                                             Longitude.valueOf(lon.toUpperCase()));
 
@@ -53,8 +53,8 @@ public class Game {
             this.printGrids(this.getPlayer2());
             System.out.println("Welcome Player " + this.getPlayer1().getName() + "!");
             System.out.print("Please enter the coordinates of your move (ROW and COLUMN): ");
-            lat = scanner.next();
-            lon = scanner.next();
+            lat = scanner.nextLine();
+            lon = scanner.nextLine();
             this.move(this.getPlayer2(), this.getPlayer1(), Latitude.valueOf(lat.toUpperCase()),
                                             Longitude.valueOf(lon.toUpperCase()));
         }
