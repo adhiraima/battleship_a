@@ -88,9 +88,9 @@ public class Grid {
             case HIT: System.out.print(ANSI_RED_BACKGROUND + ANSI_RED + ApplicationConstants.SPACE
                     + ApplicationConstants.SPACE + ANSI_RESET); break;
             case MISS: System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + ApplicationConstants.MISSED
-                    + ApplicationConstants.SPACE + ANSI_RESET);
+                    + ApplicationConstants.SPACE + ANSI_RESET); break;
             default: System.out.print(ANSI_BLACK_BACKGROUND + ApplicationConstants.SPACE
-                    + ApplicationConstants.SPACE + ANSI_RESET);
+                    + ApplicationConstants.SPACE + ANSI_RESET); break;
         }
     }
 
@@ -100,10 +100,10 @@ public class Grid {
                     + ApplicationConstants.SPACE + ANSI_RESET); break;
 //            case OCCUPIED: System.out.print(ANSI_BLACK_BACKGROUND + ApplicationConstants.SPACE
 //                    + ApplicationConstants.SPACE + ANSI_RESET); break; //do not show the occupied for the enemy
-            case HIT: System.out.print(ANSI_RED_BACKGROUND + ANSI_RED + ApplicationConstants.HIT
+            case HIT: System.out.print(ANSI_BLACK_BACKGROUND + ANSI_RED + ApplicationConstants.HIT
                     + ApplicationConstants.SPACE + ANSI_RESET); break;
             case MISS: System.out.print(ANSI_BLACK_BACKGROUND + ANSI_WHITE + ApplicationConstants.MISSED
-                    + ApplicationConstants.SPACE + ANSI_RESET);
+                    + ApplicationConstants.SPACE + ANSI_RESET); break;
             default: System.out.print(ANSI_BLACK_BACKGROUND + ApplicationConstants.SPACE
                     + ApplicationConstants.SPACE + ANSI_RESET);
         }

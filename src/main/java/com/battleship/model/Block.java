@@ -1,6 +1,5 @@
 package com.battleship.model;
 
-
 import com.battleship.enums.BlockState;
 
 public class Block {
@@ -28,5 +27,14 @@ public class Block {
 
     public void hit() {
         this.state = BlockState.HIT;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Block)) return false;
+        Block block = (Block) o;
+        return latitude == block.latitude &&
+                longitude == block.longitude;
     }
 }

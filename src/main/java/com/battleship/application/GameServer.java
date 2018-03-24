@@ -20,17 +20,18 @@ public class GameServer {
         //take player name inputs
         System.out.print("Enter Player 1 name: ");
         String p1 = scanner.next();
-        System.out.println();
+        System.out.println(ApplicationConstants.SPACE);
         System.out.print("Enter Player 2 name: ");
         String p2 = scanner.next();
-        System.out.println();
+        System.out.println(ApplicationConstants.SPACE);
 
         //create the game
         Game game = new Game(p1, p2);
         //place the ships for each player
         placeShips(game.getPlayer1());
         placeShips(game.getPlayer2());
-
+        //start the game
+        game.startGame();
     }
 
     private static void placeShips(Player player) throws IOException {
@@ -43,21 +44,17 @@ public class GameServer {
                 System.out.println((j + 1) + ". " + ShipType.get(ships[j].toString())
                         + "(" + (ships[j].getNumber() - player.getShipTypeCount(ships[j]) + ")"));
             }
-            System.out.println();
+
             System.out.print("Please choose a ship by number: ");
             int chosenShip = scanner.nextInt();
-            System.out.println();
+            System.out.println(ApplicationConstants.SPACE);
             System.out.print("Please select Coordinates to place a ship (ROW space COLUMN): ");
             String latitude = scanner.next();
             String longitude = scanner.next();
-            System.out.println();
+            System.out.println(ApplicationConstants.SPACE);
             System.out.print("Please select Orientation (VERTICAL or HORIZONTAL): ");
             String orientation = scanner.next();
-            System.out.println();
-            System.out.println(chosenShip + " " + Latitude.valueOf(latitude.toUpperCase())
-                    + " " + Longitude.valueOf(longitude.toUpperCase())
-                    + " " + AxialOrientation.valueOf(orientation.toUpperCase()));
-            System.out.println();
+            System.out.println(ApplicationConstants.SPACE);
             switch (chosenShip) {
                 case 1: player.addShip(ShipType.BATTLESHIP,
                                         Latitude.valueOf(latitude.toUpperCase()),

@@ -45,17 +45,17 @@ public class Player {
 
     public int getShipTypeCount(ShipType type) {
         int count = 0;
-        if (this.ships[0] == null) return count;
-        for (Ship ship: this.ships) {
-            System.out.println("Ship type " + ship.getShipType().toString());
-            if (ship.getShipType().toString().equals(type))
+
+        for (int i = 0; i < this.ships.length; i++) {
+            if (this.ships[i] == null) continue;
+            if (this.ships[i].getShipType().equals(type))
                 count++;
         }
         return count;
     }
 
     public boolean canPlaceMoreShips() {
-        return ApplicationConstants.SHIPS_ALLOWED - this.shipCount >= 0;
+        return ApplicationConstants.SHIPS_ALLOWED > this.shipCount;
     }
 
     public String addShip(ShipType shipType, Latitude latitude, Longitude longitude, AxialOrientation axialOrientation) {
@@ -82,7 +82,7 @@ public class Player {
                              }
                              break;
             case VERTICAL:  for (int i = latitude.getLatitude(); i < ship.getShipType().getSize()
-                                    + longitude.getLongitude(); i++) {
+                                    + latitude.getLatitude(); i++) {
                                 this.board.getBlocks()[i][longitude.getLongitude()].occupy();
                             }
                             break;
