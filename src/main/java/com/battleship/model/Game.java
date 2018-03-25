@@ -66,7 +66,7 @@ public class Game {
         player.getEnemy().printGrid(ApplicationConstants.ENEMY);
     }
 
-    public Block move(Player player, Player enemy, Latitude latitude, Longitude longitude) {
+    public Block move(Player player, Player enemy, Latitude latitude, Longitude longitude) throws IOException {
         Block enemyBoardBlock = player.getEnemy().getBlocks()[latitude.getLatitude()][longitude.getLongitude()];
         Block block = enemy.getBoard().getBlocks()[latitude.getLatitude()][longitude.getLongitude()];
         if (block.getState() == BlockState.OCCUPIED) {
@@ -82,6 +82,7 @@ public class Game {
             if (enemy.getAfloatShips() > 0)
                 System.out.println("Enemy has " + enemy.getAfloatShips() + " remaining");
             else {
+                this.printGrids(player);
                 System.out.println("Congratulations " + player.getName() + "! you have WON!!!");
                 System.exit(0);
             }
