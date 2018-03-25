@@ -37,10 +37,9 @@ public class Game {
     public void startGame() throws IOException {
         // ask each player for placing the battle ships
         // move in cyclic order
-
         while (this.isGameRunning) {
             if (!this.isGameRunning) break;
-            Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
+            System.out.println(ApplicationConstants.LINE_DIVIDER);
             this.printGrids(this.getPlayer1());
             System.out.println("Welcome Player " + this.getPlayer1().getName() + "!");
             System.out.println(this.getPlayer1().getName() + " please enter the coordinates of your move (ROW and COLUMN): ");

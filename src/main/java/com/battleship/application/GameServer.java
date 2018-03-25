@@ -16,21 +16,21 @@ public class GameServer {
     static ShipType[] ships = ShipType.values();
 
     public static void main(String[] args) throws IOException {
-
-        System.out.print("The time >>> " + (7500 / 3600));
-        Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
+        System.out.println(ApplicationConstants.LINE_DIVIDER);
+        //Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
         //take player name inputs
-        System.out.print("Enter Player 1 name: ");
+        System.out.println("Enter Player 1 name: ");
         String p1 = scanner.nextLine();
         System.out.println(ApplicationConstants.SPACE);
-        System.out.print("Enter Player 2 name: ");
+        System.out.println("Enter Player 2 name: ");
         String p2 = scanner.nextLine();
         System.out.println(ApplicationConstants.SPACE);
-
+        System.out.println(ApplicationConstants.LINE_DIVIDER);
         //create the game
         Game game = new Game(p1, p2);
         //place the ships for each player
         placeShips(game.getPlayer1());
+        System.out.println(ApplicationConstants.LINE_DIVIDER);
         placeShips(game.getPlayer2());
         //start the game
         game.startGame();

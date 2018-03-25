@@ -12,4 +12,5 @@ public interface ApplicationConstants {
     public static final String HIT = "X";
     public static final String EXIT_KEYWORD = "EXIT";
     public static final String ENEMY = "ENEMY";
+    public static final String LINE_DIVIDER = "======================================================================";
 }
