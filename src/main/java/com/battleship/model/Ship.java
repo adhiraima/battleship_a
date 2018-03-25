@@ -21,6 +21,10 @@ public class Ship {
         this.blocks[this.blocksCount++] = block;
     }
 
+    public Block[] getBlocks() {
+        return this.blocks;
+    }
+
     public boolean blocksFull() {
         return this.blocksCount == blocks.length;
     }

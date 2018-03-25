@@ -16,6 +16,8 @@ public class GameServer {
     static ShipType[] ships = ShipType.values();
 
     public static void main(String[] args) throws IOException {
+
+        System.out.print("The time >>> " + (7500 / 3600));
         Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
         //take player name inputs
         System.out.print("Enter Player 1 name: ");
@@ -45,14 +47,12 @@ public class GameServer {
                         + "(" + (ships[j].getNumber() - player.getShipTypeCount(ships[j]) + ")"));
             }
 
-            System.out.print("Please choose a ship by number: ");
+            System.out.println("Please choose a ship by number: ");
             int chosenShip = scanner.nextInt();
-            scanner.nextLine();
-            System.out.print("Please select Coordinates to place a ship (ROW space COLUMN): ");
+            System.out.println("Please select Coordinates to place a ship (ROW space COLUMN): ");
             String latitude = scanner.next();
             String longitude = scanner.next();
-            scanner.nextLine();
-            System.out.print("Please select Orientation (VERTICAL or HORIZONTAL): ");
+            System.out.println("Please select Orientation (VERTICAL or HORIZONTAL): ");
             String orientation = scanner.next();
             switch (chosenShip) {
                 case 1: player.addShip(ShipType.BATTLESHIP,

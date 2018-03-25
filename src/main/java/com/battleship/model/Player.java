@@ -15,8 +15,8 @@ public class Player {
         this.name = name;
         this.board = new Grid(GridType.SELF.getGridType()).initialize();
         this.enemy = new Grid(GridType.ENEMY.getGridType()).initialize();
-        this.ships = new Ship[ApplicationConstants.SHIPS_ALLOWED];//new Ship[ShipType.BATTLESHIP.getNumber() + ShipType.CRUISER.getNumber()
-                        //+ ShipType.DESTROYER.getNumber() + ShipType.SUBMARINE.getNumber()];
+        this.ships = new Ship[ShipType.BATTLESHIP.getNumber() + ShipType.CRUISER.getNumber()
+                        + ShipType.DESTROYER.getNumber() + ShipType.SUBMARINE.getNumber()];
     }
 
     public String getName() {
@@ -33,6 +33,10 @@ public class Player {
 
     public int getShipCount() {
         return this.shipCount;
+    }
+
+    public Ship[] getShips() {
+        return this.ships;
     }
 
     public int getAfloatShips() {
@@ -78,12 +82,14 @@ public class Player {
         switch (axialOrientation) {
             case HORIZONTAL: for (int i = longitude.getLongitude(); i < ship.getShipType().getSize()
                                     + longitude.getLongitude(); i++) {
-                                 this.board.getBlocks()[latitude.getLatitude()][i].occupy();
+                                this.board.getBlocks()[latitude.getLatitude()][i].occupy();
+                                ship.addBlock(this.board.getBlocks()[latitude.getLatitude()][i]);
                              }
                              break;
             case VERTICAL:  for (int i = latitude.getLatitude(); i < ship.getShipType().getSize()
                                     + latitude.getLatitude(); i++) {
                                 this.board.getBlocks()[i][longitude.getLongitude()].occupy();
+                                ship.addBlock(this.board.getBlocks()[i][longitude.getLongitude()]);
                             }
                             break;
             default: break;
@@ -93,9 +99,9 @@ public class Player {
     private boolean checkPlacement(ShipType shipType, Latitude latitude, Longitude longitude,
                                    AxialOrientation axialOrientation) {
         switch (axialOrientation) {
-            case HORIZONTAL: return (null != Longitude.get(longitude.getLongitude() + shipType.getSize())
+            case HORIZONTAL: return (null != Longitude.get(longitude.getLongitude() - 1 + shipType.getSize())
                     && spaceFree(shipType, latitude, longitude, axialOrientation));
-            case VERTICAL: return (null != Latitude.get(latitude.getLatitude() + shipType.getSize())
+            case VERTICAL: return (null != Latitude.get(latitude.getLatitude() - 1 + shipType.getSize())
                     && spaceFree(shipType, latitude, longitude, axialOrientation));
             default: return false;
         }
@@ -104,13 +110,13 @@ public class Player {
     private boolean spaceFree(ShipType shipType, Latitude latitude, Longitude longitude,
                               AxialOrientation axialOrientation) {
         switch (axialOrientation) {
-            case HORIZONTAL: for (int i = longitude.getLongitude(); i < shipType.getSize()
+            case HORIZONTAL: for (int i = longitude.getLongitude(); i < shipType.getSize() - 1
                                     + longitude.getLongitude(); i++) {
                 if (!this.board.getBlocks()[latitude.getLatitude()][i].getState().equals(BlockState.EMPTY))
                     return false;
             }
             return true;
-            case VERTICAL:  for (int i = latitude.getLatitude(); i < shipType.getSize()
+            case VERTICAL:  for (int i = latitude.getLatitude(); i < shipType.getSize() - 1
                                     + longitude.getLongitude(); i++) {
                 if (!this.board.getBlocks()[i][longitude.getLongitude()].getState().equals(BlockState.EMPTY))
                     return false;
