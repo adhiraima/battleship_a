@@ -60,14 +60,13 @@ public class GameServer {
                 System.out.println("Please select Coordinates to place a ship (ROW space COLUMN): ");
                 latitude = scanner.next();
                 longitude = scanner.next();
-                System.out.println("Please select Orientation ((V)ERTICAL or (H)ORIZONTAL): ");
+                System.out.println("Please select Orientation (VERTICAL or HORIZONTAL): ");
                 orientation = scanner.next();
-                if ((chosenShip < 1 && chosenShip > ShipType.values().length)
-                        && (null != Latitude.valueOf(latitude) && null != Longitude.valueOf(longitude))
+                if ((chosenShip >= 1 && chosenShip <= ShipType.values().length)
+                        && (null != Latitude.valueOf(latitude.toUpperCase())
+                                && null != Longitude.valueOf(longitude.toUpperCase()))
                         && (orientation.equalsIgnoreCase("HORIZONTAL")
-                                || orientation.equalsIgnoreCase("VERTICAL")
-                                || orientation.equalsIgnoreCase("H")
-                                || orientation.equalsIgnoreCase("V"))) {
+                                || orientation.equalsIgnoreCase("VERTICAL"))) {
                     inputComplete = true;
                 } else {
                     System.out.println(ApplicationConstants.LINE_DIVIDER);
