@@ -13,4 +13,5 @@ public interface ApplicationConstants {
     public static final String EXIT_KEYWORD = "EXIT";
     public static final String ENEMY = "ENEMY";
     public static final String LINE_DIVIDER = "======================================================================";
+    public static final String EMPTY = "";
 }

@@ -9,6 +9,7 @@ import com.battleship.model.Player;
 import com.battleship.utils.ApplicationConstants;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class GameServer {
@@ -46,14 +47,35 @@ public class GameServer {
                 System.out.println((j + 1) + ". " + ShipType.get(ships[j].toString())
                         + "(" + (ships[j].getNumber() - player.getShipTypeCount(ships[j]) + ")"));
             }
+            boolean inputComplete = false;
+            int chosenShip = Integer.MIN_VALUE;
+//            String latPattern = "[1-10]|[one|ONE|One]|[two|TWO|Two]|[three|THREE|Three]|[four|FOUR|Four]|[five|FIVE|Five]|[six|SIX|Six]|[seven|SEVEN|Seven]|[eight|EIGHT|Eight]|[nine|NINE|Nine]|[ten|TEN|Ten]";
+//            String lonPattern = "[a-jA-J]";
+            String latitude = ApplicationConstants.EMPTY;
+            String longitude = ApplicationConstants.EMPTY;
+            String orientation = ApplicationConstants.EMPTY;
+            while (!inputComplete) {
+                System.out.println("Please choose a ship by number: ");
+                chosenShip = scanner.nextInt();
+                System.out.println("Please select Coordinates to place a ship (ROW space COLUMN): ");
+                latitude = scanner.next();
+                longitude = scanner.next();
+                System.out.println("Please select Orientation ((V)ERTICAL or (H)ORIZONTAL): ");
+                orientation = scanner.next();
+                if ((chosenShip < 1 && chosenShip > ShipType.values().length)
+                        && (null != Latitude.valueOf(latitude) && null != Longitude.valueOf(longitude))
+                        && (orientation.equalsIgnoreCase("HORIZONTAL")
+                                || orientation.equalsIgnoreCase("VERTICAL")
+                                || orientation.equalsIgnoreCase("H")
+                                || orientation.equalsIgnoreCase("V"))) {
+                    inputComplete = true;
+                } else {
+                    System.out.println(ApplicationConstants.LINE_DIVIDER);
+                    System.out.println("Wrong input.. please try again!!");
+                    System.out.println(ApplicationConstants.LINE_DIVIDER);
+                }
+            }
 
-            System.out.println("Please choose a ship by number: ");
-            int chosenShip = scanner.nextInt();
-            System.out.println("Please select Coordinates to place a ship (ROW space COLUMN): ");
-            String latitude = scanner.next();
-            String longitude = scanner.next();
-            System.out.println("Please select Orientation (VERTICAL or HORIZONTAL): ");
-            String orientation = scanner.next();
             switch (chosenShip) {
                 case 1: player.addShip(ShipType.BATTLESHIP,
                                         Latitude.valueOf(latitude.toUpperCase()),
