@@ -6,6 +6,7 @@ import com.battleship.enums.Longitude;
 import com.battleship.enums.ShipType;
 import com.battleship.utils.ApplicationConstants;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.UUID;
@@ -38,23 +39,37 @@ public class Game {
         // ask each player for placing the battle ships
         // move in cyclic order
         while (this.isGameRunning) {
+            boolean playerInput = false;
             if (!this.isGameRunning) break;
             System.out.println(ApplicationConstants.LINE_DIVIDER);
             this.printGrids(this.getPlayer1());
             System.out.println("Welcome Player " + this.getPlayer1().getName() + "!");
-            System.out.println(this.getPlayer1().getName() + " please enter the coordinates of your move (ROW and COLUMN): ");
-            String lat = scanner.next();
-            String lon = scanner.next();
+            String lat = ApplicationConstants.EMPTY;
+            String lon = ApplicationConstants.EMPTY;
+            while (!playerInput) {
+                System.out.println(this.getPlayer1().getName() + " please enter the coordinates of your move (ROW and COLUMN): ");
+                lat = scanner.next();
+                lon = scanner.next();
+                if (null != Latitude.valueOf(lat.toUpperCase())
+                        && null != Longitude.valueOf(lon.toUpperCase())) {
+                    playerInput = true;
+                }
+            }
             this.move(this.getPlayer1(), this.getPlayer2(), Latitude.valueOf(lat.toUpperCase()),
                                             Longitude.valueOf(lon.toUpperCase()));
 
-
+            playerInput = false;
             this.printGrids(this.getPlayer2());
             System.out.println("Welcome Player " + this.getPlayer2().getName() + "!");
-            System.out.println(this.getPlayer2().getName() +" please enter the coordinates of your move (ROW and COLUMN): ");
-            lat = scanner.next();
-            lon = scanner.next();
-            scanner.nextLine();
+            while (!playerInput) {
+                System.out.println(this.getPlayer2().getName() + " please enter the coordinates of your move (ROW and COLUMN): ");
+                lat = scanner.next();
+                lon = scanner.next();
+                if (null != Latitude.valueOf(lat.toUpperCase())
+                        && null != Longitude.valueOf(lon.toUpperCase())) {
+                    playerInput = true;
+                }
+            }
             this.move(this.getPlayer2(), this.getPlayer1(), Latitude.valueOf(lat.toUpperCase()),
                                             Longitude.valueOf(lon.toUpperCase()));
         }
