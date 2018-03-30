@@ -3,10 +3,8 @@ package com.battleship.model;
 import com.battleship.enums.BlockState;
 import com.battleship.enums.Latitude;
 import com.battleship.enums.Longitude;
-import com.battleship.enums.ShipType;
 import com.battleship.utils.ApplicationConstants;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.UUID;
@@ -57,7 +55,6 @@ public class Game {
             }
             this.move(this.getPlayer1(), this.getPlayer2(), Latitude.valueOf(lat.toUpperCase()),
                                             Longitude.valueOf(lon.toUpperCase()));
-
             playerInput = false;
             this.printGrids(this.getPlayer2());
             System.out.println("Welcome Player " + this.getPlayer2().getName() + "!");
@@ -73,11 +70,6 @@ public class Game {
             this.move(this.getPlayer2(), this.getPlayer1(), Latitude.valueOf(lat.toUpperCase()),
                                             Longitude.valueOf(lon.toUpperCase()));
         }
-    }
-
-    private void printGrids(Player player) throws IOException {
-        player.getBoard().printGrid(player.getName());
-        player.getEnemy().printGrid(ApplicationConstants.ENEMY);
     }
 
     public Block move(Player player, Player enemy, Latitude latitude, Longitude longitude) throws IOException {
@@ -114,6 +106,12 @@ public class Game {
             block.hit();
             System.out.println(player.getName() + ", you have made a repeat hit!");
         }
+        scanner.nextLine();
         return block;
+    }
+
+    private void printGrids(Player player) throws IOException {
+        player.getBoard().printGrid(player.getName());
+        player.getEnemy().printGrid(ApplicationConstants.ENEMY);
     }
 }

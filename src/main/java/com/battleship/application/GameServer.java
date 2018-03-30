@@ -7,6 +7,7 @@ import com.battleship.enums.ShipType;
 import com.battleship.model.Game;
 import com.battleship.model.Player;
 import com.battleship.utils.ApplicationConstants;
+import com.battleship.utils.DisplayUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,7 +19,8 @@ public class GameServer {
 
     public static void main(String[] args) throws IOException {
         System.out.println(ApplicationConstants.LINE_DIVIDER);
-        //Runtime.getRuntime().exec(ApplicationConstants.CLEAR_COMMAND);
+        String[] clearCommand = {"bash", ApplicationConstants.CLEAR_COMMAND};
+        Runtime.getRuntime().exec(clearCommand);
         //take player name inputs
         System.out.println("Enter Player 1 name: ");
         String p1 = scanner.nextLine();
@@ -31,8 +33,10 @@ public class GameServer {
         Game game = new Game(p1, p2);
         //place the ships for each player
         placeShips(game.getPlayer1());
+        DisplayUtils.printPage();
         System.out.println(ApplicationConstants.LINE_DIVIDER);
         placeShips(game.getPlayer2());
+        DisplayUtils.printPage();
         //start the game
         game.startGame();
     }
